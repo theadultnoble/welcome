@@ -91,7 +91,7 @@ export default function App() {
               Add
             </Button>
           </Box>
-          <Stack pt={10} pb={1} direction="row" justifyContent="space-between">
+          <Stack pt={5} pb={1} direction="row" justifyContent="space-between">
             <ToggleButtonGroup
               color="primary"
               size="small"
@@ -131,9 +131,18 @@ export default function App() {
                 Done
               </ToggleButton>
             </ToggleButtonGroup>
+            <Button variant="text" onClick={clearCompleted}>
+              Clear
+            </Button>
           </Stack>
           <List>
             {tasks.map((task) => {
+              if (
+                (filter === "active" && task.done) ||
+                (filter === "done" && !task.done)
+              ) {
+                return null;
+              }
               const labelId = `checkbox-list-label-${task.id}`;
               return (
                 <Paper
